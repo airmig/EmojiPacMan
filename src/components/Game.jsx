@@ -149,6 +149,11 @@ const Game = ({ characters, onGameOver }) => {
     if (isPowered) {
       const timer = setTimeout(() => {
         setIsPowered(false);
+        // Reset all ghosts to normal state when power pellet expires
+        setGhosts(prev => prev.map(ghost => ({
+          ...ghost,
+          isVulnerable: false
+        })));
       }, POWER_PELLET_DURATION);
       setPowerTimer(timer);
       return () => clearTimeout(timer);
@@ -271,11 +276,11 @@ const Game = ({ characters, onGameOver }) => {
         // Reset ghost to ghost house with updated coordinates
         setGhosts(prev => prev.map(g => 
           g === collidedGhost 
-            ? { ...g, state: 'inHouse', x: 13 + (Math.random() > 0.5 ? 1 : 0), y: 14 }
+            ? { ...g, state: 'inHouse', x: 13 + (Math.random() > 0.5 ? 1 : 0), y: 14, isVulnerable: false }
             : g
         ));
         setGhostReleaseTimer(prev => Math.max(0, prev - GHOST_RELEASE_INTERVAL));
-        setScore(prev => prev + 200);
+        setScore(prev => prev + 100000);
       } else {
         setIsGameOver(true);
         setIsVictory(false);
@@ -290,33 +295,6 @@ const Game = ({ characters, onGameOver }) => {
       onGameOver(score);
     }
   }, [pacman, ghosts, dots, powerPellets, score, isPowered, onGameOver]);
-
-  // Handle ghost collisions
-  useEffect(() => {
-    if (isGameOver) return;
-
-    const checkGhostCollision = () => {
-      const pacmanCell = `${pacman.x},${pacman.y}`;
-      
-      ghosts.forEach((ghost, index) => {
-        const ghostCell = `${ghost.x},${ghost.y}`;
-        if (pacmanCell === ghostCell) {
-          if (isPowered) {
-            // Ghost is eaten - return to ghost house and add 100,000 points
-            setScore(prev => prev + 100000);
-            setGhosts(prev => prev.map((g, i) => 
-              i === index ? { ...g, x: 13, y: 13, direction: 'up', isVulnerable: false } : g
-            ));
-          } else {
-            // Game over if Pacman touches ghost without power-up
-            setIsGameOver(true);
-          }
-        }
-      });
-    };
-
-    checkGhostCollision();
-  }, [pacman.x, pacman.y, ghosts, isPowered, isGameOver]);
 
   const isWall = (x, y) => {
     // Border walls
