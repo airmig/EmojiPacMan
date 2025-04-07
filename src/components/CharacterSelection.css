@@ -1,0 +1,63 @@
+.character-selection {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.selection-section {
+  margin: 20px 0;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.emoji-button {
+  font-size: 2rem;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.emoji-button:hover {
+  transform: scale(1.1);
+  border-color: #666;
+}
+
+.emoji-button.selected {
+  border-color: #4CAF50;
+  background-color: #E8F5E9;
+}
+
+.emoji-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.start-game-button {
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.start-game-button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.start-game-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+} 
