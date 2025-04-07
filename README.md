@@ -9,7 +9,7 @@ A modern take on the classic Pacman game, built with React and featuring customi
 - **Modern Design**: Neon-style graphics with smooth animations and visual effects
 - **Classic Gameplay**: True to the original Pacman mechanics
 - **Power-Up Mode**: Collect power pellets to turn the tables on the ghosts
-- **Score Tracking**: Points for dots (10), power pellets (50), and eating ghosts (200)
+- **Score Tracking**: Points for dots (10), power pellets (50), and eating ghosts (100,000)
 
 ## 🚀 Live Demo
 
@@ -60,12 +60,14 @@ npm run dev
 3. **Scoring**:
    - Regular Dot: 10 points
    - Power Pellet: 50 points
-   - Eating a Ghost: 200 points
+   - Eating a Ghost: 100,000 points
+   - Ghosts return to the ghost house when eaten
 
 4. **Power-Up Mode**:
    - Collect power pellets in the corners
    - Ghosts become vulnerable for 10 seconds
-   - Chase and eat ghosts for bonus points
+   - Chase and eat ghosts for massive bonus points
+   - Eaten ghosts return to the ghost house
    - Use quick mouse movements to catch fleeing ghosts
 
 5. **Win Condition**:

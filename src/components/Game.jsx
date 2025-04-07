@@ -291,6 +291,33 @@ const Game = ({ characters, onGameOver }) => {
     }
   }, [pacman, ghosts, dots, powerPellets, score, isPowered, onGameOver]);
 
+  // Handle ghost collisions
+  useEffect(() => {
+    if (isGameOver) return;
+
+    const checkGhostCollision = () => {
+      const pacmanCell = `${pacman.x},${pacman.y}`;
+      
+      ghosts.forEach((ghost, index) => {
+        const ghostCell = `${ghost.x},${ghost.y}`;
+        if (pacmanCell === ghostCell) {
+          if (isPowered) {
+            // Ghost is eaten - return to ghost house and add 100,000 points
+            setScore(prev => prev + 100000);
+            setGhosts(prev => prev.map((g, i) => 
+              i === index ? { ...g, x: 13, y: 13, direction: 'up', isVulnerable: false } : g
+            ));
+          } else {
+            // Game over if Pacman touches ghost without power-up
+            setIsGameOver(true);
+          }
+        }
+      });
+    };
+
+    checkGhostCollision();
+  }, [pacman.x, pacman.y, ghosts, isPowered, isGameOver]);
+
   const isWall = (x, y) => {
     // Border walls
     if (x === 0 || x === GRID_SIZE - 1 || y === 0 || y === GRID_SIZE - 1) return true;
