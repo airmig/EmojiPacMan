@@ -273,10 +273,21 @@ const Game = ({ characters, onGameOver }) => {
 
     if (collidedGhost) {
       if (isPowered) {
-        // Reset ghost to ghost house with updated coordinates
+        // Reset ghost to its initial position in the ghost house
         setGhosts(prev => prev.map(g => 
           g === collidedGhost 
-            ? { ...g, state: 'inHouse', x: 13 + (Math.random() > 0.5 ? 1 : 0), y: 14, isVulnerable: false }
+            ? { 
+                ...g, 
+                state: 'inHouse',
+                x: g === ghosts[0] ? 13 : 
+                   g === ghosts[1] ? 14 : 
+                   g === ghosts[2] ? 13 : 14,
+                y: g === ghosts[0] || g === ghosts[1] ? 14 : 15,
+                direction: g === ghosts[0] ? 'right' : 
+                          g === ghosts[1] ? 'left' : 
+                          g === ghosts[2] ? 'up' : 'down',
+                isVulnerable: false
+              }
             : g
         ));
         setGhostReleaseTimer(prev => Math.max(0, prev - GHOST_RELEASE_INTERVAL));
