@@ -13,14 +13,14 @@ A modern take on the classic Pacman game, built with React and featuring customi
 
 ## 🚀 Live Demo
 
-Try the game at: https://airmig.github.io/catman/
+Try the game at: https://airmig.github.io/EmojiPacMan/
 
 ## 🛠️ Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/airmig/catman.git
-cd catman
+git clone https://github.com/airmig/EmojiPacMan.git
+cd EmojiPacMan
 ```
 
 2. Install dependencies:
@@ -83,7 +83,7 @@ npm run dev
 
 ### Project Structure
 ```
-catman/
+EmojiPacMan/
 ├── src/
 │   ├── components/
 │   │   ├── Game.jsx         # Main game logic and mouse controls
